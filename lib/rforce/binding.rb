@@ -159,6 +159,8 @@ module RForce
       @builder = Builder::XmlMarkup.new(:target => expanded)
       expand(@builder, {method => args}, urn)
 
+      puts "\n\nexpanded: #{expanded}\n\n"
+
       extra_headers = ""
 
       # QueryOptions is not valid when making an Apex Webservice SOAP call
@@ -184,6 +186,7 @@ module RForce
       # Fill in the blanks of the SOAP envelope with our
       # session ID and the expanded XML of our request.
       request = (Envelope % [@session_id, extra_headers, expanded])
+      puts "\n\nrequest: #{request}\n\n"
       @logger && @logger.info("RForce request: #{request}")
 
       # reset the batch size for the next request
